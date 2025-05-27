@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "DirectusAPI",
     platforms: [
-        .macOS(.v11),
+        .macOS(.v14),
         .iOS(.v17)
     ],
     products: [

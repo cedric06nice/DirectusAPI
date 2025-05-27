@@ -14,42 +14,42 @@ public enum DirectusUserStatus: String, Codable {
 
 @MainActor
 public final class DirectusUser: DirectusData {
-    public private(set) var email: String? {
+    public internal(set) var email: String? {
         get { getValue(forKey: "email") as? String }
         set { setValue(newValue, forKey: "email") }
     }
     
-    public private(set) var password: String? {
+    public internal(set) var password: String? {
         get { getValue(forKey: "password") as? String }
         set { setValue(newValue, forKey: "password") }
     }
     
-    public private(set) var firstname: String? {
+    public internal(set) var firstname: String? {
         get { getValue(forKey: "first_name") as? String }
         set { setValue(newValue, forKey: "first_name") }
     }
     
-    public private(set) var lastname: String? {
+    public internal(set) var lastname: String? {
         get { getValue(forKey: "last_name") as? String }
         set { setValue(newValue, forKey: "last_name") }
     }
     
-    public private(set) var descriptionText: String? {
+    public internal(set) var descriptionText: String? {
         get { getValue(forKey: "description") as? String }
         set { setValue(newValue, forKey: "description") }
     }
     
-    public private(set) var roleUUID: String? {
+    public internal(set) var roleUUID: String? {
         get { getValue(forKey: "role") as? String }
         set { setValue(newValue, forKey: "role") }
     }
     
-    public private(set) var avatar: String? {
+    public internal(set) var avatar: String? {
         get { getValue(forKey: "avatar") as? String }
         set { setValue(newValue, forKey: "avatar") }
     }
     
-    public private(set) var status: DirectusUserStatus? {
+    public internal(set) var status: DirectusUserStatus? {
         get {
             guard let raw = getValue(forKey: "status") as? String else { return nil }
             return DirectusUserStatus(rawValue: raw)
