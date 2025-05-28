@@ -6,7 +6,7 @@
 //
 
 @MainActor
-public protocol AnyDirectusWebSocketSubscription {
+public protocol AnyDirectusWebSocketSubscription: Sendable {
     var uid: String { get }
     var onCreate: (([String: Any]) -> Void)? { get }
     var onUpdate: (([String: Any]) -> Void)? { get }

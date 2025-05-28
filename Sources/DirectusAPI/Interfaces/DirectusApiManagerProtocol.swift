@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-public protocol DirectusApiManagerProtocol {
+public protocol DirectusApiManagerProtocol: Sendable {
 
     // Token Management
     var shouldRefreshToken: Bool { get }

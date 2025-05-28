@@ -6,7 +6,7 @@
 //
 
 @MainActor
-public protocol LocalDirectusCacheProtocol {
+public protocol LocalDirectusCacheProtocol: Sendable {
     func getCacheEntry(key: String) async throws -> CacheEntry?
     func setCacheEntry(cacheEntry: CacheEntry, tags: [String]) async throws
     func removeCacheEntry(key: String) async throws

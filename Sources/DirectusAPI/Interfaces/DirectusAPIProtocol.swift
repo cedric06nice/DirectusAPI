@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-public protocol DirectusAPIProtocol {
+public protocol DirectusAPIProtocol: Sendable {
     var shouldRefreshToken: Bool { get }
     var accessToken: String? { get }
     var currentAuthToken: String? { get }
