@@ -51,9 +51,9 @@ public struct CollectionMetadata {
 public enum CollectionMetadataRegistry {
     private static var registry: [ObjectIdentifier: CollectionMetadata] = [:]
     
-    public static func register<T: DirectusCollection>(_ type: T.Type, metadata: CollectionMetadata) {
+    public static func register<T: DirectusCollection>(_ type: T.Type) {
         let id = ObjectIdentifier(type)
-        registry[id] = metadata
+        registry[id] = T.collectionMetadata
     }
     
     public static func metadata<T: DirectusCollection>(for type: T.Type) -> CollectionMetadata? {
