@@ -24,13 +24,18 @@ private class SymbolMap {
     }
     
     private func loadJSON() {
-        guard let url = Bundle.main.url(forResource: "materialToSFSymbols", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let decoded = try? JSONDecoder().decode([String: String].self, from: data) else {
-            Logger.icon.error("❌ Failed to load or parse materialToSFSymbols.json")
-            return
+        let bundle = Bundle.module
+        if let url = bundle.url(forResource: "materialToSFSymbols", withExtension: "json") {
+            if let data = try? Data(contentsOf: url),
+               let decoded = try? JSONDecoder().decode([String: String].self, from: data) {
+                self.mapping = decoded
+                return
+            } else {
+                Logger.icon.error("❌ Failed to parse JSON at: \(url.lastPathComponent, privacy: .public)")
+            }
+        } else {
+            Logger.icon.error("❌ Could not find materialToSFSymbols.json in module bundle")
         }
-        self.mapping = decoded
     }
     
     func sfSymbol(for materialSymbol: String) -> String {
