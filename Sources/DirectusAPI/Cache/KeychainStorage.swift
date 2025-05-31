@@ -8,6 +8,7 @@
 import Foundation
 import Security
 
+@MainActor
 public enum KeychainStorage {
     private static var refreshTokenKey: String {
         let bundleID = Bundle.main.bundleIdentifier ?? "DefaultApp"

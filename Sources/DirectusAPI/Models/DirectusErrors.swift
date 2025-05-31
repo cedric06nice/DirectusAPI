@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 enum DirectusErrorCode: String, Codable, Sendable {
     case invalidPayload = "INVALID_PAYLOAD"
     case invalidCredentials = "INVALID_CREDENTIALS"
@@ -14,6 +15,7 @@ enum DirectusErrorCode: String, Codable, Sendable {
 }
 
 // MARK: - DirectusError
+@MainActor
 struct DirectusError: Codable, Sendable {
     let reason: String?
     let code: DirectusErrorCode
@@ -61,6 +63,7 @@ extension DirectusError {
 }
 
 // MARK: - DirectusErrorExtension
+@MainActor
 struct DirectusErrorExtension: Codable, Sendable {
     let message: String
     let extensions: DirectusError
@@ -108,6 +111,7 @@ extension DirectusErrorExtension {
 }
 
 // MARK: - DirectusErrors
+@MainActor
 struct DirectusErrors: Error, Codable, Sendable {
     let errors: [DirectusErrorExtension]
     

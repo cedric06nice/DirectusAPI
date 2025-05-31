@@ -5,7 +5,8 @@
 //  Created by Cedric Pugnaire on 26/05/2025.
 //
 
-public struct PreparedRequest: @unchecked Sendable {
+@MainActor
+public struct PreparedRequest: Sendable {
     public let request: Any
     public let tags: [String]
 

@@ -18,11 +18,11 @@ open class DirectusData {
         }
         self._rawReceivedData = rawReceivedData
         
-//        // 🔐 Auto-register metadata if subclass conforms
-//        if let selfType = type(of: self) as? any DirectusCollection.Type {
-//            CollectionMetadataRegistry
-//                .register(selfType, metadata: selfType.collectionMetadata)
-//        }
+        // 🔐 Auto-register metadata if subclass conforms
+        if let selfType = type(of: self) as? any DirectusCollection.Type {
+            CollectionMetadataRegistry
+                .register(selfType)
+        }
     }
     
     func newDirectusData(rawReceivedData: [String: Any] = [:]) {

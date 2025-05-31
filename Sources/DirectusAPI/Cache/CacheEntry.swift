@@ -66,3 +66,14 @@ public struct CacheEntry: Codable {
         return (response, data)
     }
 }
+
+extension CacheEntry: @preconcurrency Equatable {
+    public static func == (lhs: CacheEntry, rhs: CacheEntry) -> Bool {
+        lhs.key == rhs.key &&
+        lhs.dateCreated == rhs.dateCreated &&
+        lhs.validUntil == rhs.validUntil &&
+        lhs.headers == rhs.headers &&
+        lhs.body == rhs.body &&
+        lhs.statusCode == rhs.statusCode
+    }
+}

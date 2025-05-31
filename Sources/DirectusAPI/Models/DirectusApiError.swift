@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct DirectusApiError: Error, LocalizedError {
+@MainActor
+public struct DirectusApiError: Error, @preconcurrency LocalizedError {
     let response: HTTPURLResponse?
     let bodyData: Data?
     let customMessage: String?

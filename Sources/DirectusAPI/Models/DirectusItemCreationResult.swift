@@ -48,3 +48,9 @@ public enum DirectusItemCreationResult<T> {
             return .success([item])
     }
 }
+
+extension DirectusItemCreationResult {
+    static func mocked(_ item: T) -> DirectusItemCreationResult<T> {
+        return .success([item])
+    }
+}

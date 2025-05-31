@@ -16,13 +16,20 @@ public final class MockCacheEngine: LocalDirectusCacheProtocol {
         calls.append((name, arguments))
     }
 
-    private func nextReturn<T>() -> T {
-        return returnQueue.removeFirst() as! T
+    private func nextReturn<T>() throws -> T {
+        guard !returnQueue.isEmpty else {
+            throw MockCacheEngineError.emptyReturnQueue(expected: T.self)
+        }
+        let value = returnQueue.removeFirst()
+        guard let casted = value as? T else {
+            throw MockCacheEngineError.emptyReturnQueue(expected: T.self)
+        }
+        return casted
     }
 
     public func getCacheEntry(key: String) async throws -> CacheEntry? {
         recordCall("getCacheEntry", arguments: ["key": key])
-        return nextReturn()
+        return try nextReturn()
     }
 
     public func setCacheEntry(cacheEntry: CacheEntry, tags: [String]) async throws {
@@ -39,5 +46,16 @@ public final class MockCacheEngine: LocalDirectusCacheProtocol {
 
     public func clearCache() async throws {
         recordCall("clearCache")
+    }
+}
+
+enum MockCacheEngineError: Error, CustomStringConvertible {
+    case emptyReturnQueue(expected: Any.Type)
+    
+    var description: String {
+        switch self {
+        case .emptyReturnQueue(let expected):
+            return "MockCacheEngineError: returnQueue is empty or does not contain type \(expected)"
+        }
     }
 }

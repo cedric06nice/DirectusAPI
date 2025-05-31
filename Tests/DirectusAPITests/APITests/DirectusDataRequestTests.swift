@@ -9,8 +9,8 @@ import Testing
 @testable import DirectusAPI
 import Foundation
 
+@MainActor
 struct DirectusDataRequestTests {
-    @MainActor
     @Test func testGetListOfItemsWithFields() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
         let request = sut.prepareGetListOfItemsRequest(
@@ -27,12 +27,12 @@ struct DirectusDataRequestTests {
     @Test
     func testGetListOfItemsWithFilter() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
-        let filter = await PropertyFilter(
+        let filter = PropertyFilter(
             field: "title",
             operator: .equals,
             value: "A"
         )
-        let request = await sut.prepareGetListOfItemsRequest(
+        let request = sut.prepareGetListOfItemsRequest(
             endpointName: "article",
             endpointPrefix: "/items/",
             filter: filter
@@ -45,11 +45,11 @@ struct DirectusDataRequestTests {
     @Test
     func testGetListOfItemsWithSort() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
-        let sort = await [
+        let sort = [
             SortProperty(name: "score", ascending: false),
             SortProperty(name: "level")
         ]
-        let request = await sut.prepareGetListOfItemsRequest(
+        let request = sut.prepareGetListOfItemsRequest(
             endpointName: "article",
             endpointPrefix: "/items/",
             sortBy: sort
@@ -63,7 +63,7 @@ struct DirectusDataRequestTests {
     @Test
     func testGetListOfItemsWithLimit() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
-        let request = await sut.prepareGetListOfItemsRequest(
+        let request = sut.prepareGetListOfItemsRequest(
             endpointName: "article",
             endpointPrefix: "/items/",
             limit: 10
@@ -75,7 +75,7 @@ struct DirectusDataRequestTests {
     @Test
     func testGetListOfItemsWithOffset() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
-        let request = await sut.prepareGetListOfItemsRequest(
+        let request = sut.prepareGetListOfItemsRequest(
             endpointName: "article",
             endpointPrefix: "/items/",
             offset: 10
@@ -87,16 +87,16 @@ struct DirectusDataRequestTests {
     @Test
     func testGetListOfItemsWithFilterSortLimit() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
-        let filter = await PropertyFilter(
+        let filter = PropertyFilter(
             field: "title",
             operator: .equals,
             value: "A"
         )
-        let sort = await [
+        let sort = [
             SortProperty(name: "score", ascending: false),
             SortProperty(name: "level")
         ]
-        let request = await sut.prepareGetListOfItemsRequest(
+        let request = sut.prepareGetListOfItemsRequest(
             endpointName: "article",
             endpointPrefix: "/items/",
             filter: filter,
@@ -113,12 +113,12 @@ struct DirectusDataRequestTests {
     @Test
     func testGetListOfItemsWithSpecialCharacters() async {
         let sut = await DirectusTestHelpers.makeAuthenticatedDirectusAPI()
-        let filter = await PropertyFilter(
+        let filter = PropertyFilter(
             field: "date",
             operator: .between,
             value: ["$NOW", "$NOW(+2 weeks)"]
         )
-        let request = await sut.prepareGetListOfItemsRequest(
+        let request = sut.prepareGetListOfItemsRequest(
             endpointName: "article",
             endpointPrefix: "/items/",
             filter: filter

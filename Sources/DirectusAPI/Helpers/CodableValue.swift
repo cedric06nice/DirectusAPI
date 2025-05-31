@@ -5,6 +5,7 @@
 //  Created by Cedric Pugnaire on 26/05/2025.
 //
 
+@MainActor
 enum CodableValue: Codable {
     case string(String), int(Int), double(Double), bool(Bool)
     case array([CodableValue]), dictionary([String: CodableValue])
@@ -23,7 +24,7 @@ enum CodableValue: Codable {
         }
     }
     
-    func encode(to encoder: Encoder) throws {
+    nonisolated func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .string(let value): try container.encode(value)
@@ -36,7 +37,7 @@ enum CodableValue: Codable {
         }
     }
     
-    init(from decoder: Decoder) throws {
+    nonisolated init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if container.decodeNil() { self = .null }
         else if let val = try? container.decode(Int.self) { self = .int(val) }

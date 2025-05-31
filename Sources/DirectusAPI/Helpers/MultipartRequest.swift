@@ -5,6 +5,7 @@
 //  Created by Cedric Pugnaire on 26/05/2025.
 //
 
+@MainActor
 public struct MultipartRequest: Codable {
     public var method: String
     public var url: String?
@@ -18,6 +19,7 @@ public struct MultipartRequest: Codable {
     }
 }
 
+@MainActor
 public struct MultipartFile: Codable {
     public var filename: String
     public var contentType: ContentType
@@ -28,6 +30,7 @@ public struct MultipartFile: Codable {
     }
 }
 
+@MainActor
 public struct ContentType: Codable {
     public var mimeType: String
 }
