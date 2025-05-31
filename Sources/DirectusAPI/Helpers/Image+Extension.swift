@@ -9,14 +9,16 @@ import SwiftUI
 import OSLog
 
 extension Logger {
+    @MainActor
     internal static let icon = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "com.cedric06nice.DirectusAPI",
         category: "IconMapper"
     )
 }
 
+@MainActor
 private class SymbolMap {
-    @MainActor static let shared = SymbolMap()
+    static let shared = SymbolMap()
     private var mapping: [String: String] = [:]
     
     private init() {
