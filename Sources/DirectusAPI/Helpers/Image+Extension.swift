@@ -15,7 +15,6 @@ extension Logger {
     )
 }
 
-@MainActor
 private class SymbolMap {
     @MainActor static let shared = SymbolMap()
     private var mapping: [String: String] = [:]
