@@ -113,7 +113,7 @@ struct DirectusGeometryTypeTests {
             _ = try JSONDecoder().decode(DirectusGeometryType.self, from: badJSON)
             #expect(Bool(false), "Decoding should have failed for malformed JSON")
         } catch {
-            #expect(true) // pass
+            #expect(Bool(true)) // pass
         }
     }
 }

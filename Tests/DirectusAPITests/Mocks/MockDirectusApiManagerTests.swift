@@ -85,7 +85,7 @@ struct MockDirectusApiManagerTests {
 
         switch result {
         case .failure:
-            #expect(true)
+            #expect(Bool(true))
         case .success:
             #expect(Bool(false), "Expected failure, got success")
         }

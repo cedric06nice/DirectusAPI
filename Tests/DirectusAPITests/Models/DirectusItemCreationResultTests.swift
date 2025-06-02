@@ -114,7 +114,7 @@ struct DirectusItemCreationResultTests {
 
         switch result {
         case .failure:
-            #expect(true)
+            #expect(Bool(true))
         default:
             #expect(Bool(false), "Expected failure due to parse error")
         }

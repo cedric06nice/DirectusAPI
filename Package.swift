@@ -5,18 +5,19 @@ import PackageDescription
 
 let package = Package(
     name: "DirectusAPI",
-    platforms: [
-        .macOS(.v14),
-        .iOS(.v17)
-    ],
+    platforms: [.macOS(.v14), .iOS(.v17)],
     products: [
-        .library(
-            name: "DirectusAPI",
-            targets: ["DirectusAPI"]),
+        .library(name: "DirectusAPI", targets: ["DirectusAPI"])
+    ],
+    dependencies: [
+        .package(url: "https://github.com/cedric06nice/DirectusAPIMacros.git", from: "1.0.0")
     ],
     targets: [
         .target(
             name: "DirectusAPI",
+            dependencies: [
+                .product(name: "DirectusAPIMacros", package: "DirectusAPIMacros")
+            ],
             resources: [
                 .process("Helpers/materialToSFSymbols.json")
             ]
@@ -24,6 +25,6 @@ let package = Package(
         .testTarget(
             name: "DirectusAPITests",
             dependencies: ["DirectusAPI"]
-        ),
+        )
     ]
 )
