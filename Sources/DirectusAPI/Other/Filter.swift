@@ -14,7 +14,7 @@ public protocol Filter {
 }
 
 @MainActor
-enum FilterOperator: String {
+public enum FilterOperator: String {
     case equals = "_eq"
     case notEqual = "_neq"
     case lessThan = "_lt"
@@ -38,12 +38,12 @@ enum FilterOperator: String {
 }
 
 @MainActor
-struct PropertyFilter: Filter {
+public struct PropertyFilter: Filter {
     let field: String
     let `operator`: FilterOperator
     let value: Any
     
-    var asJSON: String {
+    public var asJSON: String {
         let testObject = [field: [self.operator.rawValue: value]]
         guard JSONSerialization.isValidJSONObject(testObject) else {
             return "{ \"\(field)\": { \"\(self.operator.rawValue)\": null } }"
@@ -54,43 +54,43 @@ struct PropertyFilter: Filter {
         return data.flatMap { String(data: $0, encoding: .utf8) } ?? "{}"
     }
     
-    var asDictionary: [String: Any] {
+    public var asDictionary: [String: Any] {
         return [field: [`operator`.rawValue: value]]
     }
 }
 
 @MainActor
-enum LogicalOperator: String {
+public enum LogicalOperator: String {
     case and = "_and"
     case or = "_or"
 }
 
 @MainActor
-struct LogicalOperatorFilter: Filter {
+public struct LogicalOperatorFilter: Filter {
     let `operator`: LogicalOperator
     let children: [Filter]
     
-    var asJSON: String {
+    public var asJSON: String {
         let childJSON = children.map { $0.asJSON }.joined(separator: " , ")
         return "{ \"\(`operator`.rawValue)\": [ \(childJSON) ] }"
     }
     
-    var asDictionary: [String: Any] {
+    public var asDictionary: [String: Any] {
         let childDictionaries = children.map { $0.asDictionary }
         return [`operator`.rawValue: childDictionaries]
     }
 }
 
 @MainActor
-struct RelationFilter: Filter {
+public struct RelationFilter: Filter {
     let propertyName: String
     let linkedObjectFilter: Filter
     
-    var asJSON: String {
+    public var asJSON: String {
         return "{ \"\(propertyName)\": \(linkedObjectFilter.asJSON) }"
     }
     
-    var asDictionary: [String: Any] {
+    public var asDictionary: [String: Any] {
         return [propertyName: linkedObjectFilter.asDictionary]
     }
 }
