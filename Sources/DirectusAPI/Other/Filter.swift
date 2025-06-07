@@ -39,9 +39,15 @@ public enum FilterOperator: String {
 
 @MainActor
 public struct PropertyFilter: Filter {
-    public let field: String
-    public let `operator`: FilterOperator
-    public let value: Any
+    let field: String
+    let `operator`: FilterOperator
+    let value: Any
+    
+    public init(field: String, `operator`: FilterOperator, value: Any) {
+        self.field = field
+        self.operator = `operator`
+        self.value = value
+    }
     
     public var asJSON: String {
         let testObject = [field: [self.operator.rawValue: value]]
@@ -67,8 +73,13 @@ public enum LogicalOperator: String {
 
 @MainActor
 public struct LogicalOperatorFilter: Filter {
-    public let `operator`: LogicalOperator
-    public let children: [Filter]
+    let `operator`: LogicalOperator
+    let children: [Filter]
+    
+    public init(`operator`: LogicalOperator, children: [Filter]) {
+        self.children = children
+        self.operator = `operator`
+    }
     
     public var asJSON: String {
         let childJSON = children.map { $0.asJSON }.joined(separator: " , ")
@@ -83,8 +94,13 @@ public struct LogicalOperatorFilter: Filter {
 
 @MainActor
 public struct RelationFilter: Filter {
-    public let propertyName: String
-    public let linkedObjectFilter: Filter
+    let propertyName: String
+    let linkedObjectFilter: Filter
+    
+    public init(propertyName: String, linkedObjectFilter: Filter) {
+        self.propertyName = propertyName
+        self.linkedObjectFilter = linkedObjectFilter
+    }
     
     public var asJSON: String {
         return "{ \"\(propertyName)\": \(linkedObjectFilter.asJSON) }"
