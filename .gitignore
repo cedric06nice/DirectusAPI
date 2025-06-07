@@ -10,3 +10,4 @@ DerivedData/
 /UML_Class_Overview.csv
 /uml_diagram.png
 *.resolved
+*.xcworkspace

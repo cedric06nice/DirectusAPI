@@ -6,15 +6,6 @@
 //
 
 import Foundation
-import DirectusAPIMacros
-
-//@DirectusClassRegistration
-//@DirectusAddToCollectionList(DirectusFile.self)
-private final class TestingMacroCed: DirectusCollection {
-    static var collectionMetadata  = CollectionMetadata(endpointName: "test")
-    
-    var items: [DirectusItem] = []
-}
 
 @MainActor
 class DirectusItem: DirectusData {
