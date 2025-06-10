@@ -19,7 +19,7 @@ let package = Package(
                 .product(name: "DirectusAPIMacros", package: "DirectusAPIMacros")
             ],
             resources: [
-                .process("Helpers/materialToSFSymbols.json")
+                .process("DirectusIcons/GoogleFonts/Fonts/")
             ]
         ),
         .testTarget(
